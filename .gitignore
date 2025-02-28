@@ -1,9 +1,9 @@
 __pycache__/
 __MACOSX/
 .ruff_cache/
-.secrets/
 .venv/
 data/
+.secrets
 
 # editor directories and files
 .idea
