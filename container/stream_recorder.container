@@ -1,0 +1,7 @@
+[Container]
+Image=quay.io/gmanka/stream_recorder
+Volume=/home/USERNAME/data/:/app/data
+
+[Install]
+WantedBy=default.target
+
