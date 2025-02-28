@@ -1,0 +1,17 @@
+[project]
+dependencies = [
+    'yt_dlp',
+    'rich',
+]
+name = 'stream_recorder'
+version = '25.0.0'
+readme = 'readme.md'
+requires-python = '>=3.11'
+classifiers = [
+    'License :: OSI Approved :: GNU Affero General Public License v3',
+]
+
+[tool.pyright]
+venvPath = '.'
+venv = '.venv'
+

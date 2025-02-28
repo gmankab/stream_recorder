@@ -1,0 +1,16 @@
+__pycache__/
+__MACOSX/
+.ruff_cache/
+.secrets/
+.venv/
+data/
+
+# editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
