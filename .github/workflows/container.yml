@@ -1,0 +1,49 @@
+name: container
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 7 * * *'
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt update -y
+          sudo apt install -y qemu-user-static
+      - uses: redhat-actions/buildah-build@v2
+        with:
+          image: stream_recorder
+          tags: latest ${{ github.sha }}
+          platforms: linux/amd64, linux/arm64, linux/riscv64, linux/arm/v7
+          containerfiles: |
+            container/Containerfile
+      - name: quay.io
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: stream_recorder
+          tags: latest ${{ github.sha }}
+          registry: quay.io/gmanka
+          username: gmankab
+          password: ${{ secrets.QUAY_TOKEN }}
+      - name: docker.io
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: stream_recorder
+          tags: latest ${{ github.sha }}
+          registry: docker.io/gmanka
+          username: gmanka
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: ghcr.io
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: stream_recorder
+          tags: latest ${{ github.sha }}
+          registry: ghcr.io/gmankab
+          username: gmankab
+          password: ${{ secrets.GITHUB_TOKEN }}
+

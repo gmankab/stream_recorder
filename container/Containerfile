@@ -1,0 +1,6 @@
+FROM docker.io/alpine:3.21
+
+RUN apk add python3 py3-pip ffmpeg
+RUN python -m pip install -U stream_recorder --break-system-packages
+CMD ["/usr/local/bin/stream_recorder"]
+
