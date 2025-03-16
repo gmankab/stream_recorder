@@ -2,6 +2,9 @@
 Image=quay.io/gmanka/stream_recorder
 Volume=/home/USERNAME/data/:/app/data
 
+[Service]
+Restart=always
+
 [Install]
 WantedBy=default.target
 
