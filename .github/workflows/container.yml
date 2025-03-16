@@ -12,13 +12,15 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
-      - run: |
+      - id: date
+        run: |
           sudo apt update -y
           sudo apt install -y qemu-user-static
+          echo "date=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
       - uses: redhat-actions/buildah-build@v2
         with:
           image: stream_recorder
-          tags: latest ${{ github.sha }}
+          tags: latest ${{ steps.date.outputs.date }}
           platforms: linux/amd64, linux/arm64, linux/riscv64, linux/arm/v7
           containerfiles: |
             container/Containerfile
@@ -26,7 +28,7 @@ jobs:
         uses: redhat-actions/push-to-registry@v2
         with:
           image: stream_recorder
-          tags: latest ${{ github.sha }}
+          tags: latest ${{ steps.date.outputs.date }}
           registry: quay.io/gmanka
           username: gmankab
           password: ${{ secrets.QUAY_TOKEN }}
@@ -34,7 +36,7 @@ jobs:
         uses: redhat-actions/push-to-registry@v2
         with:
           image: stream_recorder
-          tags: latest ${{ github.sha }}
+          tags: latest ${{ steps.date.outputs.date }}
           registry: docker.io/gmanka
           username: gmanka
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -42,7 +44,7 @@ jobs:
         uses: redhat-actions/push-to-registry@v2
         with:
           image: stream_recorder
-          tags: latest ${{ github.sha }}
+          tags: latest ${{ steps.date.outputs.date }}
           registry: ghcr.io/gmankab
           username: gmankab
           password: ${{ secrets.GITHUB_TOKEN }}
