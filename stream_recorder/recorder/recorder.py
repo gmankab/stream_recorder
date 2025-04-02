@@ -30,6 +30,7 @@ class Recorder:
             'logger': self.logger,
             'paths': {'home': str(self.dir)},
             'quiet': True,
+            'keepvideo': True,
         }
         self.task: asyncio.Task
 
