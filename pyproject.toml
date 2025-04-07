@@ -7,9 +7,7 @@ name = 'stream_recorder'
 version = '25.0.4'
 readme = 'readme.md'
 requires-python = '>=3.10'
-classifiers = [
-    'License :: OSI Approved :: GNU Affero General Public License v3',
-]
+license = 'GPL-3.0-only'
 
 [project.urls]
 repo = 'https://github.com/gmankab/stream_recorder'
