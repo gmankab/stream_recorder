@@ -26,3 +26,6 @@ build = [
 venvPath = '.'
 venv = '.venv'
 
+[tool.setuptools.packages.find]
+where = ['.']
+
